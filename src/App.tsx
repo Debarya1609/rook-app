@@ -4,6 +4,7 @@ import IntentAndPositioning from "./renderers/IntentAndPositioning";
 import MessagingEffectiveness from "./renderers/MessagingEffectiveness";
 import StrategicVerdict from "./renderers/StrategicVerdict";
 import TrustAndCredibility from "./renderers/TrustAndCredibility";
+import FinalScore from "./renderers/FinalScore";
 
 
 import { RookAnalyzeOutputSchema } from "./contracts/rookAnalyzeOutput.v1";
@@ -30,6 +31,7 @@ export default function App() {
       <TrustAndCredibility data={analysis.trust_and_credibility} />
       <MessagingEffectiveness data={analysis.messaging_effectiveness} />
       <ConversionReadiness data={analysis.conversion_readiness} />
+      <FinalScore data={analysis.final_score} />
     </main>
   );
 }
