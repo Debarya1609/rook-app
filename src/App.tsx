@@ -1,11 +1,13 @@
-import AudienceAnalysis from "./renderers/AudienceAnalysis";
-import ConversionReadiness from "./renderers/ConversionReadiness";
-import IntentAndPositioning from "./renderers/IntentAndPositioning";
-import MessagingEffectiveness from "./renderers/MessagingEffectiveness";
-import StrategicVerdict from "./renderers/StrategicVerdict";
-import TrustAndCredibility from "./renderers/TrustAndCredibility";
-import FinalScore from "./renderers/FinalScore";
+import AnalysisPage from "./layouts/AnalysisPage";
+import ReportHeader from "./components/ReportHeader";
 
+import StrategicVerdict from "./renderers/StrategicVerdict";
+import IntentAndPositioning from "./renderers/IntentAndPositioning";
+import AudienceAnalysis from "./renderers/AudienceAnalysis";
+import TrustAndCredibility from "./renderers/TrustAndCredibility";
+import MessagingEffectiveness from "./renderers/MessagingEffectiveness";
+import ConversionReadiness from "./renderers/ConversionReadiness";
+import FinalScore from "./renderers/FinalScore";
 
 import { RookAnalyzeOutputSchema } from "./contracts/rookAnalyzeOutput.v1";
 import mockData from "./mocks/sampleAnalyzeOutput.v1.json";
@@ -24,7 +26,13 @@ export default function App() {
   const analysis = parsed.data;
 
   return (
-    <main className="max-w-3xl mx-auto p-6 space-y-6">
+    <AnalysisPage>
+      <ReportHeader
+        platform={analysis.meta.platform}
+        asset={analysis.meta.asset_identifier}
+        generatedAt={analysis.meta.generated_at}
+      />
+
       <StrategicVerdict verdict={analysis.strategic_verdict} />
       <IntentAndPositioning data={analysis.intent_and_positioning} />
       <AudienceAnalysis data={analysis.audience_analysis} />
@@ -32,6 +40,6 @@ export default function App() {
       <MessagingEffectiveness data={analysis.messaging_effectiveness} />
       <ConversionReadiness data={analysis.conversion_readiness} />
       <FinalScore data={analysis.final_score} />
-    </main>
+    </AnalysisPage>
   );
 }
