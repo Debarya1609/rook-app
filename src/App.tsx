@@ -1,8 +1,9 @@
-import StrategicVerdict from "./renderers/StrategicVerdict";
-import IntentAndPositioning from "./renderers/IntentAndPositioning";
 import AudienceAnalysis from "./renderers/AudienceAnalysis";
-import TrustAndCredibility from "./renderers/TrustAndCredibility";
+import ConversionReadiness from "./renderers/ConversionReadiness";
+import IntentAndPositioning from "./renderers/IntentAndPositioning";
 import MessagingEffectiveness from "./renderers/MessagingEffectiveness";
+import StrategicVerdict from "./renderers/StrategicVerdict";
+import TrustAndCredibility from "./renderers/TrustAndCredibility";
 
 
 import { RookAnalyzeOutputSchema } from "./contracts/rookAnalyzeOutput.v1";
@@ -28,6 +29,7 @@ export default function App() {
       <AudienceAnalysis data={analysis.audience_analysis} />
       <TrustAndCredibility data={analysis.trust_and_credibility} />
       <MessagingEffectiveness data={analysis.messaging_effectiveness} />
+      <ConversionReadiness data={analysis.conversion_readiness} />
     </main>
   );
 }
