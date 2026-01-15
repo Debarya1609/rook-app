@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "version": "rook_analyze_output_v1",
+    "analysis_id": "demo-analysis-001",
+    "generated_at": "2026-01-15T12:00:00Z",
+    "platform": "website",
+    "asset_identifier": "https://example-startup.com",
+    "analysis_confidence": {
+      "level": "medium",
+      "reason": "Public-facing information is sufficient but lacks depth in conversion and audience clarity."
+    }
+  },
+  "strategic_verdict": {
+    "summary": "The website presents itself as a modern SaaS product, but its messaging prioritizes aesthetic polish over strategic clarity. While it looks credible at first glance, it struggles to communicate who it is truly for and why it should be trusted beyond surface-level claims.",
+    "core_problem": "Positioning is vague and audience intent is assumed rather than demonstrated.",
+    "core_strength": "Visual presentation and perceived professionalism.",
+    "primary_risk": "Users may leave without understanding the actual value or relevance of the product.",
+    "who_this_is_actually_for": "Early-stage founders exploring tools, rather than committed buyers."
+  },
+  "intent_and_positioning": {
+    "stated_intent": "Help teams move faster with better workflows.",
+    "observed_intent": "Appears to focus more on looking premium than clearly solving a specific problem.",
+    "intent_alignment": {
+      "level": "partially_aligned",
+      "explanation": "The messaging suggests productivity gains, but lacks concrete proof or focus."
+    },
+    "positioning_clarity": {
+      "score": 5.5,
+      "justification": "The product category is implied, not explicitly defined."
+    }
+  },
+  "audience_analysis": {
+    "intended_audience": "Product teams and startups",
+    "actual_audience": "Curious visitors and early-stage founders",
+    "audience_clarity": {
+      "score": 5.0,
+      "justification": "The site does not clearly signal who should feel immediately addressed."
+    },
+    "market_mismatch": {
+      "exists": true,
+      "explanation": "The messaging suggests a mature solution, but evidence aligns more with an exploratory product."
+    }
+  },
+  "trust_and_credibility": {
+    "trust_score": 6.0,
+    "signals_present": [
+      "professional design",
+      "consistent branding"
+    ],
+    "signals_missing": [
+      "case studies",
+      "customer testimonials",
+      "clear founder credibility"
+    ],
+    "credibility_risks": [
+      "Generic claims without validation"
+    ],
+    "justification": "Trust is implied visually but not reinforced with concrete proof."
+  },
+  "messaging_effectiveness": {
+    "clarity_score": 5.5,
+    "key_message": "Work faster with better tools.",
+    "confusion_points": [
+      "What makes this different?",
+      "Who is this specifically for?"
+    ],
+    "language_tone_assessment": "vague",
+    "justification": "The language sounds polished but avoids specificity."
+  },
+  "conversion_readiness": {
+    "score": 4.5,
+    "primary_call_to_action": "Get Started",
+    "friction_points": [
+      "Unclear value before signup",
+      "No immediate reassurance"
+    ],
+    "conversion_logic_gap": "Users are asked to commit before understanding the benefit.",
+    "justification": "The site assumes trust that has not yet been earned."
+  },
+  "platform_insights": {
+    "platform_strengths": [
+      "Clean layout",
+      "Modern UI conventions"
+    ],
+    "platform_misuse": [
+      "Homepage tries to do too much at once"
+    ],
+    "missed_platform_opportunities": [
+      "Clear hero statement",
+      "Focused problem articulation"
+    ]
+  },
+  "final_score": {
+    "score": 5.6,
+    "score_band": "average",
+    "why_not_higher": "Lack of clarity and weak trust reinforcement.",
+    "why_not_lower": "The foundation is solid and not misleading."
+  },
+  "analyst_notes": {
+    "assumptions_made": [
+      "The product is early-stage",
+      "No strong sales funnel exists yet"
+    ],
+    "unknowns": [
+      "Actual user retention",
+      "Post-signup experience"
+    ],
+    "recommended_next_analysis": [
+      "Deeper conversion flow analysis",
+      "Competitor positioning comparison"
+    ]
+  }
+}
