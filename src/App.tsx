@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import StrategicVerdict from "./renderers/StrategicVerdict";
+import IntentAndPositioning from "./renderers/IntentAndPositioning";
+import AudienceAnalysis from "./renderers/AudienceAnalysis";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { RookAnalyzeOutputSchema } from "./contracts/rookAnalyzeOutput.v1";
+import mockData from "./mocks/sampleAnalyzeOutput.v1.json";
+
+export default function App() {
+  const parsed = RookAnalyzeOutputSchema.safeParse(mockData);
+
+  if (!parsed.success) {
+    return (
+      <div className="p-6 text-red-400">
+        Invalid ROOK analysis data. Rendering aborted.
+      </div>
+    );
+  }
+
+  const analysis = parsed.data;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="max-w-3xl mx-auto p-6 space-y-6">
+      <StrategicVerdict verdict={analysis.strategic_verdict} />
+      <IntentAndPositioning data={analysis.intent_and_positioning} />
+      <AudienceAnalysis data={analysis.audience_analysis} />
+    </main>
+  );
 }
-
-export default App
