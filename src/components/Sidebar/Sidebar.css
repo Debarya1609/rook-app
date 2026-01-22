@@ -27,6 +27,11 @@
   cursor: pointer;
 }
 
+.sidebar-toggle:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
 .sidebar-nav {
   display: flex;
   flex-direction: column;

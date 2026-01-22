@@ -1,22 +1,27 @@
-import "./Sidebar.css";
 import {
-  Home,
   BarChart2,
-  Settings,
   Brain,
   FilePlus,
+  Home,
   Menu,
+  Settings,
 } from "lucide-react";
+import "./Sidebar.css";
 
-type Props = {
+type SidebarProps = {
   collapsed: boolean;
   onToggle: () => void;
 };
 
-export default function Sidebar({ collapsed, onToggle }: Props) {
+export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : "expanded"}`}>
-      <button className="sidebar-toggle" onClick={onToggle}>
+      <button
+        className="sidebar-toggle"
+        onClick={onToggle}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        aria-expanded={!collapsed}
+      >
         <Menu size={20} />
       </button>
 
@@ -31,19 +36,24 @@ export default function Sidebar({ collapsed, onToggle }: Props) {
   );
 }
 
-function SidebarItem({
-  icon,
-  label,
-  collapsed,
-}: {
+/* ---------------- Sidebar Item ---------------- */
+
+type SidebarItemProps = {
   icon: React.ReactNode;
   label: string;
   collapsed: boolean;
-}) {
+  onClick?: () => void;
+};
+
+function SidebarItem({ icon, label, collapsed, onClick }: SidebarItemProps) {
   return (
-    <div className="sidebar-item">
+    <button
+      className="sidebar-item"
+      onClick={onClick}
+      title={collapsed ? label : undefined}
+    >
       {icon}
       {!collapsed && <span>{label}</span>}
-    </div>
+    </button>
   );
 }

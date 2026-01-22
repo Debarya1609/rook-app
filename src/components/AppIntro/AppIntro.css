@@ -31,6 +31,13 @@
     transform: scale(1);
   }
 }
+@keyframes logoFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
 .app-intro.fade-out .rook-logo {
   animation: logoFadeOut 300ms ease-out forwards;
 }
