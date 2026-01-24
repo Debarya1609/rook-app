@@ -1,59 +1,65 @@
+import { motion } from "framer-motion";
 import {
+  Home,
   BarChart2,
+  Settings,
   Brain,
   FilePlus,
-  Home,
   Menu,
-  Settings,
 } from "lucide-react";
 import "./Sidebar.css";
+
+type SidebarItemType = {
+  icon: React.ElementType;
+  label: string;
+};
+
+const items: SidebarItemType[] = [
+  { icon: Home, label: "Home" },
+  { icon: BarChart2, label: "Rook Analyze" },
+  { icon: Settings, label: "Rook Build" },
+  { icon: Brain, label: "Rook Evaluate" },
+  { icon: FilePlus, label: "Rook Create" },
+];
 
 type SidebarProps = {
   collapsed: boolean;
   onToggle: () => void;
+  active?: string;
 };
 
-export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export default function Sidebar({
+  collapsed,
+  onToggle,
+  active = "Home",
+}: SidebarProps) {
   return (
-    <aside className={`sidebar ${collapsed ? "collapsed" : "expanded"}`}>
-      <button
-        className="sidebar-toggle"
-        onClick={onToggle}
-        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        aria-expanded={!collapsed}
-      >
+    <motion.aside
+      className="sidebar"
+      animate={{ width: collapsed ? 72 : 240 }}
+      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+    >
+      <button className="sidebar-toggle" onClick={onToggle}>
         <Menu size={20} />
       </button>
 
       <nav className="sidebar-nav">
-        <SidebarItem icon={<Home size={18} />} label="Home" collapsed={collapsed} />
-        <SidebarItem icon={<BarChart2 size={18} />} label="Rook Analyze" collapsed={collapsed} />
-        <SidebarItem icon={<Settings size={18} />} label="Rook Build" collapsed={collapsed} />
-        <SidebarItem icon={<Brain size={18} />} label="Rook Evaluate" collapsed={collapsed} />
-        <SidebarItem icon={<FilePlus size={18} />} label="Rook Create" collapsed={collapsed} />
+        {items.map(({ icon: Icon, label }) => {
+          const isActive = active === label;
+
+          return (
+            <motion.button
+              key={label}
+              className={`sidebar-item ${isActive ? "active" : ""}`}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Icon size={18} />
+              {!collapsed && <span>{label}</span>}
+            </motion.button>
+          );
+        })}
       </nav>
-    </aside>
-  );
-}
-
-/* ---------------- Sidebar Item ---------------- */
-
-type SidebarItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  collapsed: boolean;
-  onClick?: () => void;
-};
-
-function SidebarItem({ icon, label, collapsed, onClick }: SidebarItemProps) {
-  return (
-    <button
-      className="sidebar-item"
-      onClick={onClick}
-      title={collapsed ? label : undefined}
-    >
-      {icon}
-      {!collapsed && <span>{label}</span>}
-    </button>
+    </motion.aside>
   );
 }

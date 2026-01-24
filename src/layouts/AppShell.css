@@ -1,20 +1,27 @@
 .app-shell {
-  display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
+/* Sidebar floats independently */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+}
+
+/* Main content NEVER shifts */
 .app-main {
-  flex: 1;
-  transition: margin-left 0.25s ease;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  /* This is the key */
+  display: grid;
+  place-items: center;
+
   background: #fff;
-}
-
-.app-main.collapsed {
-  margin-left: 64px;
-}
-
-.app-main.expanded {
-  margin-left: 240px;
 }

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "./AppShell.css";
 
@@ -10,10 +10,10 @@ export default function AppShell({ children }: AppShellProps) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className={`app-shell ${collapsed ? "sidebar-collapsed" : ""}`}>
+    <div className="app-shell">
       <Sidebar
         collapsed={collapsed}
-        onToggle={() => setCollapsed((prev) => !prev)}
+        onToggle={() => setCollapsed((p) => !p)}
       />
 
       <main className="app-main">

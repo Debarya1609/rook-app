@@ -6,13 +6,15 @@ import Home from "./pages/Home";
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
 
-  if (showIntro) {
-    return <AppIntro onFinish={() => setShowIntro(false)} />;
-  }
-
   return (
-    <AppShell>
-      <Home />
-    </AppShell>
+    <>
+      {showIntro && <AppIntro onFinish={() => setShowIntro(false)} />}
+
+      {!showIntro && (
+        <AppShell>
+          <Home />
+        </AppShell>
+      )}
+    </>
   );
 }
