@@ -1,65 +1,119 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion"
 import {
   Home,
-  BarChart2,
-  Settings,
-  Brain,
-  FilePlus,
-  Menu,
-} from "lucide-react";
-import "./Sidebar.css";
+  Search,
+  Wrench,
+  CheckCircle,
+  Sparkles,
+  ChevronLeft,
+} from "lucide-react"
+import { useState } from "react"
+import "./Sidebar.css"
 
-type SidebarItemType = {
-  icon: React.ElementType;
-  label: string;
-};
+type NavItem = {
+  id: string
+  label: string
+  icon: React.ElementType
+}
 
-const items: SidebarItemType[] = [
-  { icon: Home, label: "Home" },
-  { icon: BarChart2, label: "Rook Analyze" },
-  { icon: Settings, label: "Rook Build" },
-  { icon: Brain, label: "Rook Evaluate" },
-  { icon: FilePlus, label: "Rook Create" },
-];
+const navItems: NavItem[] = [
+  { id: "home", label: "Home", icon: Home },
+  { id: "analyze", label: "Rook Analyze", icon: Search },
+  { id: "build", label: "Rook Build", icon: Wrench },
+  { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle },
+  { id: "create", label: "Rook Create", icon: Sparkles },
+]
 
-type SidebarProps = {
-  collapsed: boolean;
-  onToggle: () => void;
-  active?: string;
-};
+const sidebarVariants: Variants = {
+  expanded: {
+    width: 240,
+    transition: { stiffness: 260, damping: 28 },
+  },
+  collapsed: {
+    width: 72,
+    transition: { stiffness: 260, damping: 28 },
+  },
+}
 
-export default function Sidebar({
-  collapsed,
-  onToggle,
-  active = "Home",
-}: SidebarProps) {
+const labelVariants: Variants = {
+  expanded: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.18, ease: "easeOut" },
+  },
+  collapsed: {
+    opacity: 0,
+    x: -6,
+    transition: { duration: 0.12, ease: "easeIn" },
+  },
+}
+
+export default function Sidebar() {
+  const [collapsed, setCollapsed] = useState(false)
+  const activeId = "home" // hook this to router later
+
   return (
     <motion.aside
       className="sidebar"
-      animate={{ width: collapsed ? 72 : 240 }}
-      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      variants={sidebarVariants}
+      animate={collapsed ? "collapsed" : "expanded"}
+      initial={false}
     >
-      <button className="sidebar-toggle" onClick={onToggle}>
-        <Menu size={20} />
-      </button>
+      {/* Top */}
+      <div className="sidebar-top">
+        <button
+          className="collapse-btn"
+          onClick={() => setCollapsed((v) => !v)}
+        >
+          <motion.div
+            animate={{ rotate: collapsed ? 180 : 0 }}
+            transition={{ stiffness: 260, damping: 20 }}
+          >
+            <ChevronLeft size={18} />
+          </motion.div>
+        </button>
+      </div>
 
-      <nav className="sidebar-nav">
-        {items.map(({ icon: Icon, label }) => {
-          const isActive = active === label;
+      {/* Navigation */}
+      <motion.nav
+        className="sidebar-nav"
+        initial={false}
+        animate={collapsed ? "collapsed" : "expanded"}
+        variants={{
+          expanded: { transition: { staggerChildren: 0.04 } },
+          collapsed: {
+            transition: { staggerChildren: 0.02, staggerDirection: -1 },
+          },
+        }}
+      >
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const isActive = item.id === activeId
 
           return (
-            <motion.button
-              key={label}
+            <motion.div
+              key={item.id}
               className={`sidebar-item ${isActive ? "active" : ""}`}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
             >
-              <Icon size={18} />
-              {!collapsed && <span>{label}</span>}
-            </motion.button>
-          );
+              <motion.div
+                className="icon-wrapper"
+                whileHover={{ y: -1 }}
+                transition={{ stiffness: 300, damping: 20 }}
+              >
+                <Icon size={20} />
+              </motion.div>
+
+              <motion.span
+                className="label"
+                variants={labelVariants}
+                animate={collapsed ? "collapsed" : "expanded"}
+              >
+                {item.label}
+              </motion.span>
+            </motion.div>
+          )
         })}
-      </nav>
+      </motion.nav>
     </motion.aside>
-  );
+  )
 }
