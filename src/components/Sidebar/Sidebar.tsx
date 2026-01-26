@@ -2,7 +2,7 @@ import { motion, type Variants } from "framer-motion"
 import {
   Home,
   Search,
-  Wrench,
+
   CheckCircle,
   Sparkles,
   ChevronLeft,
@@ -19,7 +19,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   { id: "home", label: "Home", icon: Home },
   { id: "analyze", label: "Rook Analyze", icon: Search },
-  { id: "build", label: "Rook Build", icon: Wrench },
+
   { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle },
   { id: "create", label: "Rook Create", icon: Sparkles },
 ]
