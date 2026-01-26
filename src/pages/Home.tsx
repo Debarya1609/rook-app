@@ -1,6 +1,10 @@
-import "./Home.css";
+import { useState } from "react"
+import "./Home.css"
+import HomeDialogbox from "../components/HomeDialogbox"
 
 export default function Home() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
   return (
     <div className="home">
       <img src="/graphics/dots-fade.png" className="bg-dots" />
@@ -13,8 +17,19 @@ export default function Home() {
           digital presence with consultant-grade reasoning.
         </p>
 
-        <button className="primary-cta">+ New Project</button>
+        <button
+          className="primary-cta"
+          onClick={() => setIsDialogOpen(true)}
+        >
+          + New Project
+        </button>
       </div>
+
+      {/* Dialogbox */}
+      <HomeDialogbox
+        open={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </div>
-  );
+  )
 }
