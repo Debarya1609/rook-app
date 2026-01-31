@@ -22,3 +22,34 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Dependency directories
+node_modules/
+jspm_packages/
+.pnp/
+.pnp.js
+
+# Optional npm cache directory
+.npm
+.eslintcache
+
+# Optional eslint cache
+.cache/
+.next/
+.nuxt/
+.out/
+
+#Environment files
+.env
+.env.test
+.env.production
+.env.local
+.env.*.local
+.envrc
+.env.test.local
+.env.production.local
+.env.staging.local
+.env.development.local
+.env.staging
+.env.development
+

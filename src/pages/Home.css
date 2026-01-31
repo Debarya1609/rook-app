@@ -1,27 +1,25 @@
 .home {
   height: 100vh;
   width: 100vw;
-
   display: grid;
   place-items: center;
-
   position: relative;
   overflow: hidden;
+  background: #ffffff;
 }
 
 .bg-dots {
   position: absolute;
   inset: 0;
   margin: auto;
-
   width: min(600px, 80vw);
   opacity: 0.18;
-  pointer-events: none;
+  pointer-events: none; /* Ensures the image doesn't block clicks */
+  z-index: 1;
 }
 
 .home-content {
   z-index: 2;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,15 +28,9 @@
 
 .home-logo {
   width: 200px;
-  margin-bottom: 16px;
-}
-
-.home-description {
-  max-width: 420px;
-  font-size: 16px;
-  color: #444;
-  line-height: 1.6;
   margin-bottom: 36px;
+  /* Keeping a very subtle shadow for a premium feel */
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
 }
 
 .primary-cta {
@@ -48,4 +40,15 @@
   padding: 14px 36px;
   border-radius: 999px;
   cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.primary-cta:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.primary-cta:active {
+  transform: translateY(0);
 }

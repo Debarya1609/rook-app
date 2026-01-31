@@ -7,16 +7,13 @@ export default function Home() {
 
   return (
     <div className="home">
-      <img src="/graphics/dots-fade.png" className="bg-dots" />
+      {/* Reverted back to the original PNG background */}
+      <img src="/graphics/dots-fade.png" className="bg-dots" alt="" />
 
       <div className="home-content">
         <img src="/rook-logo.png" alt="ROOK" className="home-logo" />
 
-        <p className="home-description">
-          ROOK is an AI-powered digital marketing analyst designed to help refine
-          digital presence with consultant-grade reasoning.
-        </p>
-
+        {/* Keeping the layout focused on the logo and CTA */}
         <button
           className="primary-cta"
           onClick={() => setIsDialogOpen(true)}
