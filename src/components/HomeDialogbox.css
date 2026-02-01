@@ -1,95 +1,148 @@
 .dialog-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
   display: grid;
   place-items: center;
-  z-index: 50;
+  z-index: 9999;
 }
 
 .dialog-card {
-  width: 420px;
+  width: 500px;
   background: #ffffff;
-  border-radius: 14px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  color: #111; /* Ensures all text is visible */
 }
 
 .dialog-header {
   display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.rook-logo {
-  font-size: 32px;
+.rook-badge {
+  width: 36px;
+  height: 36px;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
   font-weight: 800;
 }
 
 .dialog-tabs {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  background: #f4f4f5;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 24px;
 }
 
 .dialog-tabs button {
   flex: 1;
-  margin: 0 6px;
-  padding: 6px 0;
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
+  padding: 10px;
+  border: none;
   background: transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #71717a;
   cursor: pointer;
-  font-size: 13px;
 }
 
 .dialog-tabs button.active {
-  background: #bdbdbd;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .dialog-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
-.dialog-body label {
-  font-size: 12px;
-  margin-top: 8px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.dialog-body input,
-.dialog-body textarea {
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  padding: 10px;
+.input-group label {
   font-size: 13px;
+  font-weight: 600;
+  color: #3f3f46;
 }
 
+/* FIX: Ensure typed text is visible (Black on White) */
+.dialog-body input, 
 .dialog-body textarea {
-  resize: none;
-  height: 90px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  background: #fff;
+  color: #000; /* Visible digits */
+  font-size: 14px;
+  outline: none;
 }
 
-.dialog-actions {
+/* HYBRID DROPDOWN STYLING */
+.hybrid-input {
+  display: flex;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.platform-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: #fafafa;
+  border-right: 1px solid #e4e4e7;
+  position: relative;
+}
+
+.platform-dropdown select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hybrid-input input {
+  border: none !important;
+}
+
+/* FOOTER BUTTONS */
+.dialog-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 32px;
 }
 
-.cancel-btn {
-  padding: 8px 22px;
-  border-radius: 999px;
-  border: 1px solid #d1d5db;
-  background: transparent;
+.close-btn {
+  background: #fee2e2;
+  color: #dc2626; /* Prominent Red */
+  border: 1px solid #fecaca;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .save-btn {
-  padding: 8px 26px;
-  border-radius: 999px;
-  border: none;
   background: #000;
   color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
 }

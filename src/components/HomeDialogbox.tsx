@@ -2,136 +2,112 @@ import { motion, AnimatePresence, type Variants } from "framer-motion"
 import { useState } from "react"
 import "./HomeDialogbox.css"
 
+// SVG Icons for the Dropdown
+const Icons = {
+  Custom: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+  ),
+  Instagram: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
+  ),
+  LinkedIn: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+  ),
+  X: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768" /></svg>
+  )
+}
+
+const platforms = [
+  { label: "Custom", value: "", icon: Icons.Custom },
+  { label: "Instagram", value: "https://instagram.com/", icon: Icons.Instagram },
+  { label: "LinkedIn", value: "https://linkedin.com/in/", icon: Icons.LinkedIn },
+  { label: "X / Twitter", value: "https://x.com/", icon: Icons.X },
+]
+
 type Mode = "analyze" | "evaluate" | "create"
-
-type Props = {
-  open: boolean
-  onClose: () => void
-}
-
-const overlayVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-}
-
-const dialogVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.96,
-    y: 20,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      stiffness: 260,
-      damping: 24,
-    },
-  },
-}
+type Props = { open: boolean; onClose: () => void }
 
 export default function HomeDialogbox({ open, onClose }: Props) {
   const [mode, setMode] = useState<Mode>("analyze")
+  const [selectedPlatform, setSelectedPlatform] = useState(platforms[0])
 
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          className="dialog-overlay"
-          variants={overlayVariants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-        >
-          <motion.div
+        <motion.div className="dialog-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div 
             className="dialog-card"
-            variants={dialogVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
-            {/* Logo */}
             <div className="dialog-header">
-              <div className="rook-logo">R</div>
+              <div className="rook-badge">R</div>
+              <h2>Configure Project</h2>
             </div>
 
-            {/* Mode Tabs */}
             <div className="dialog-tabs">
-              <button
-                className={mode === "analyze" ? "active" : ""}
-                onClick={() => setMode("analyze")}
-              >
-                Analyze
-              </button>
-              <button
-                className={mode === "evaluate" ? "active" : ""}
-                onClick={() => setMode("evaluate")}
-              >
-                Evaluate
-              </button>
-              <button
-                className={mode === "create" ? "active" : ""}
-                onClick={() => setMode("create")}
-              >
-                Create
-              </button>
+              {(["analyze", "evaluate", "create"] as Mode[]).map((m) => (
+                <button key={m} className={mode === m ? "active" : ""} onClick={() => setMode(m)}>
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
+                </button>
+              ))}
             </div>
 
-            {/* Content */}
             <div className="dialog-body">
+              <div className="input-group">
+                <label>Project Name</label>
+                <input type="text" placeholder="e.g. Q1 Market Research" />
+              </div>
+
+              {/* ANALYZE MODE */}
               {mode === "analyze" && (
-                <>
-                  <label>Project Name:</label>
-                  <input placeholder="Give your Project Name..." />
-
-                  <label>URL:</label>
-                  <input placeholder="Paste any link to analyze..." />
-
-                  <label>Prompt:</label>
-                  <textarea placeholder='Default prompt "Analyze full"' />
-                </>
+                <div className="input-group">
+                  <label>Data Source</label>
+                  <div className="hybrid-input">
+                    <div className="platform-dropdown">
+                      {selectedPlatform.icon}
+                      <select onChange={(e) => setSelectedPlatform(platforms.find(p => p.label === e.target.value) || platforms[0])}>
+                        {platforms.map(p => <option key={p.label} value={p.label}>{p.label}</option>)}
+                      </select>
+                    </div>
+                    <input type="text" placeholder={selectedPlatform.value ? "Username..." : "https://..."} />
+                  </div>
+                </div>
               )}
 
+              {/* EVALUATE MODE (RESTORED) */}
               {mode === "evaluate" && (
-                <>
-                  <label>Project Name:</label>
-                  <input placeholder="Give your Project Name..." />
-
-                  <label>Left Side:</label>
-                  <input placeholder="Choose the left side (Your product)..." />
-
-                  <label>Right Side:</label>
-                  <input placeholder="Choose the right side (Competitor's product)..." />
-
-                  <label>Prompt:</label>
-                  <textarea placeholder='Default prompt "Analyze full"' />
-                </>
+                <div className="dual-input-row">
+                  <div className="input-group">
+                    <label>Your Product URL</label>
+                    <input type="text" placeholder="Link to your site..." />
+                  </div>
+                  <div className="input-group">
+                    <label>Competitor URL</label>
+                    <input type="text" placeholder="Link to rival site..." />
+                  </div>
+                </div>
               )}
 
+              {/* CREATE MODE (RESTORED) */}
               {mode === "create" && (
-                <>
-                  <label>Project Name:</label>
-                  <input placeholder="Give your Project Name..." />
-
-                  <label>Social media URL (Optional):</label>
-                  <input placeholder="Paste any social media link..." />
-
-                  <label>Website URL (Optional):</label>
-                  <input placeholder="Paste any website link..." />
-
-                  <label>Idea:</label>
-                  <textarea placeholder="Tell me about your Start-up idea" />
-                </>
+                <div className="input-group">
+                  <label>Campaign Objective</label>
+                  <textarea placeholder="Describe the marketing goals or content ideas..." />
+                </div>
               )}
+
+              <div className="input-group">
+                <label>System Prompt (Reasoning Level)</label>
+                <textarea className="prompt-area" placeholder='Default: "Deep Analytical Review"' />
+              </div>
             </div>
 
-            {/* Actions */}
-            <div className="dialog-actions">
-              <button className="cancel-btn" onClick={onClose}>
-                Cancel
-              </button>
-              <button className="save-btn">Save</button>
+            <div className="dialog-footer">
+              <button className="close-btn" onClick={onClose}>Close Project</button>
+              <button className="save-btn">Initialize ROOK</button>
             </div>
           </motion.div>
         </motion.div>
