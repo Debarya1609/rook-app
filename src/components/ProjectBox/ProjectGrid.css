@@ -1,0 +1,67 @@
+.manage-view {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.manage-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.search-input {
+  width: 400px;
+  padding: 14px 24px;
+  border: 2px solid #000;
+  border-radius: 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.action-row {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.btn-black {
+  background: #000;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.section-label {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.add-new-box {
+  border: 2px dashed #ccc !important;
+  background: transparent !important;
+  display: grid;
+  place-items: center;
+  color: #888;
+  cursor: pointer;
+  height: 250px; /* Matching ProjectCard height */
+}
+
+.add-new-box:hover {
+  border-color: #000 !important;
+  color: #000;
+}

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence, type Variants } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./HomeDialogbox.css"
 
 // SVG Icons for the Dropdown
@@ -26,11 +26,24 @@ const platforms = [
 ]
 
 type Mode = "analyze" | "evaluate" | "create"
-type Props = { open: boolean; onClose: () => void }
 
-export default function HomeDialogbox({ open, onClose }: Props) {
-  const [mode, setMode] = useState<Mode>("analyze")
+// FIX: Added defaultMode to the Props interface
+type Props = { 
+  open: boolean; 
+  onClose: () => void;
+  defaultMode?: Mode; 
+}
+
+export default function HomeDialogbox({ open, onClose, defaultMode = "analyze" }: Props) {
+  const [mode, setMode] = useState<Mode>(defaultMode)
   const [selectedPlatform, setSelectedPlatform] = useState(platforms[0])
+
+  // Sync internal mode state when the dialog is opened from different sections
+  useEffect(() => {
+    if (open) {
+      setMode(defaultMode)
+    }
+  }, [open, defaultMode])
 
   return (
     <AnimatePresence>
@@ -77,21 +90,21 @@ export default function HomeDialogbox({ open, onClose }: Props) {
                 </div>
               )}
 
-              {/* EVALUATE MODE (RESTORED) */}
+              {/* EVALUATE MODE */}
               {mode === "evaluate" && (
-                <div className="dual-input-row">
-                  <div className="input-group">
+                <div className="dual-input-row" style={{ display: 'flex', gap: '10px' }}>
+                  <div className="input-group" style={{ flex: 1 }}>
                     <label>Your Product URL</label>
-                    <input type="text" placeholder="Link to your site..." />
+                    <input type="text" placeholder="Your site..." />
                   </div>
-                  <div className="input-group">
+                  <div className="input-group" style={{ flex: 1 }}>
                     <label>Competitor URL</label>
-                    <input type="text" placeholder="Link to rival site..." />
+                    <input type="text" placeholder="Rival site..." />
                   </div>
                 </div>
               )}
 
-              {/* CREATE MODE (RESTORED) */}
+              {/* CREATE/BUILD MODE */}
               {mode === "create" && (
                 <div className="input-group">
                   <label>Campaign Objective</label>

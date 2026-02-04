@@ -1,6 +1,6 @@
 import { motion, type Variants, AnimatePresence } from "framer-motion";
 import {
-  Home,
+  Home as HomeIcon,
   Search,
   CheckCircle,
   Sparkles,
@@ -11,42 +11,35 @@ import {
 import { useState } from "react";
 import "./Sidebar.css";
 
-type NavItem = {
-  id: string;
-  label: string;
-  icon: React.ElementType;
-};
+type NavID = "home" | "analyze" | "evaluate" | "create";
 
-const navItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home },
+interface SidebarProps {
+  activeId: NavID;
+  onNavigate: (id: NavID) => void;
+}
+
+const navItems = [
+  { id: "home", label: "Home", icon: HomeIcon },
   { id: "analyze", label: "Rook Analyze", icon: Search },
   { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle },
   { id: "create", label: "Rook Create", icon: Sparkles },
-];
+] as const;
 
 const sidebarVariants: Variants = {
   expanded: { width: 240 },
   collapsed: { width: 72 },
 };
 
-const labelVariants: Variants = {
-  expanded: { opacity: 1, x: 0, display: "block" },
-  collapsed: { opacity: 0, x: -10, transitionEnd: { display: "none" } },
-};
-
-export default function Sidebar() {
+export default function Sidebar({ activeId, onNavigate }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
-  const activeId = "home";
 
   return (
     <motion.aside
       className="sidebar"
       variants={sidebarVariants}
       animate={collapsed ? "collapsed" : "expanded"}
-      initial={false}
     >
       <div className="sidebar-content">
-        {/* Top Section */}
         <div className="sidebar-top">
           <button className="collapse-btn" onClick={() => setCollapsed((v) => !v)}>
             <motion.div animate={{ rotate: collapsed ? 180 : 0 }}>
@@ -55,45 +48,40 @@ export default function Sidebar() {
           </button>
         </div>
 
-        {/* This is the key: The nav-container takes all remaining space */}
         <div className="sidebar-nav-container">
           <nav className="sidebar-nav">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = item.id === activeId;
+              const isActive = item.id === activeId; // Highlight logic
+              
               return (
-                <div key={item.id} className={`sidebar-item ${isActive ? "active" : ""}`}>
+                <div 
+                  key={item.id} 
+                  className={`sidebar-item ${isActive ? "active" : ""}`}
+                  onClick={() => onNavigate(item.id)} // Trigger navigation
+                >
                   <div className="icon-wrapper">
-                    <Icon size={20} />
+                    <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
                   </div>
-                  <motion.span className="label" variants={labelVariants}>
-                    {item.label}
-                  </motion.span>
+                  {!collapsed && <span className="label">{item.label}</span>}
                 </div>
               );
             })}
           </nav>
         </div>
 
-        {/* Profile Bar Section - Now guaranteed to be at the bottom */}
+        {/* User Profile Block: Pinned to floor using CSS margin-top: auto */}
         <div className="sidebar-profile">
           <div className="profile-container">
             <div className="profile-avatar">
               <User size={20} />
             </div>
-            <AnimatePresence mode="wait">
-              {!collapsed && (
-                <motion.div 
-                  className="profile-details"
-                  initial={{ opacity: 0, x: -5 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -5 }}
-                >
-                  <p className="profile-name">Dev User</p>
-                  <p className="profile-email">dev@rook.ai</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {!collapsed && (
+              <div className="profile-details">
+                <p className="profile-name">Dev User</p>
+                <p className="profile-email">dev@rook.ai</p>
+              </div>
+            )}
           </div>
           {!collapsed && <Settings size={18} className="settings-icon" />}
         </div>
