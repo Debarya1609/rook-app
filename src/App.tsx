@@ -6,7 +6,7 @@ import RookEvaluate from "./pages/RookEvaluate";
 import RookCreate from "./pages/RookBuild";
 
 // Define the available pages for TypeScript safety
-type NavID = "home" | "analyze" | "evaluate" | "create";
+type NavID = "home" | "analyze" | "evaluate" | "build";
 
 export default function App() {
   const [activePage, setActivePage] = useState<NavID>("home");
@@ -24,7 +24,7 @@ export default function App() {
         {activePage === "home" && <Home />}
         {activePage === "analyze" && <RookAnalyze />}
         {activePage === "evaluate" && <RookEvaluate />}
-        {activePage === "create" && <RookCreate />}
+        {activePage === "build" && <RookCreate />}
       </main>
     </div>
   );

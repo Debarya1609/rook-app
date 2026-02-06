@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import "./Sidebar.css";
 
-type NavID = "home" | "analyze" | "evaluate" | "create";
+type NavID = "home" | "analyze" | "evaluate" | "build";
 
 interface SidebarProps {
   activeId: NavID;
@@ -22,7 +22,7 @@ const navItems = [
   { id: "home", label: "Home", icon: HomeIcon },
   { id: "analyze", label: "Rook Analyze", icon: Search },
   { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle },
-  { id: "create", label: "Rook Create", icon: Sparkles },
+  { id: "build", label: "Rook Build", icon: Sparkles },
 ] as const;
 
 const sidebarVariants: Variants = {

@@ -1,5 +1,9 @@
+/* Import Space Mono from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Set Space Mono as the primary font */
+  font-family: 'Space Mono', monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,10 +18,11 @@
 }
 
 a {
-  font-weight: 500;
+  font-weight: 700; /* Monospace looks better slightly bolder for links */
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -28,27 +33,32 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Space Mono', monospace; /* Ensure body explicitly inherits */
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  letter-spacing: -1px; /* Tighter tracking for headers in monospace */
 }
 
-button {
+/* Ensure all inputs and buttons inherit the monospace font */
+button, input, textarea, select {
+  font-family: 'Space Mono', monospace !important;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

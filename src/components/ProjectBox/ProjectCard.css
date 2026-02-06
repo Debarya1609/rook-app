@@ -1,62 +1,109 @@
 .project-box {
   background: #ffffff;
-  border: 2px solid #000000;
-  border-radius: 20px;
+  border: 1.5px solid #000000; /* Slightly thinner border for the smaller size */
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
+  height: 280px; /* 3/4 of the previous height roughly */
 }
 
 .project-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 10px 10px 0px #000000;
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px #000000;
 }
 
 .box-preview {
-  height: 140px;
-  background: #f3f4f6;
+  height: 100px; /* Reduced height */
+  background: #f8f9fa;
   display: grid;
   place-items: center;
+  border-bottom: 1.5px solid #000;
+}
+
+.preview-label {
+  font-family: 'Space Mono', monospace;
   font-weight: 800;
-  color: #9ca3af;
-  border-bottom: 2px solid #000;
+  color: #000; /* Changed from white to black */
+  font-size: 14px;
 }
 
 .box-info {
-  padding: 20px;
+  padding: 16px;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .box-title {
-  margin: 0 0 10px 0;
-  font-size: 18px;
+  margin: 0;
+  font-size: 16px;
   font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  color: #000;
 }
 
 .box-metadata {
   display: flex;
-  gap: 10px;
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 15px;
+  align-items: center;
+  justify-content: space-between; /* Pushes date/status to extreme right */
+  margin-top: 12px;
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 999px;
+.platform-icon-wrapper {
+  color: #71717a;
+  display: flex;
+  align-items: center;
+}
+
+.metadata-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align date and status to the right */
+  gap: 2px;
+}
+
+.date-text {
+  font-size: 10px;
+  color: #a1a1aa;
+  font-family: 'Space Mono', monospace;
+}
+
+/* Status Text Styles - No ovals, just colored text */
+.status-text {
   font-size: 11px;
   font-weight: 700;
-  background: #e5e7eb;
+  font-family: 'Space Mono', monospace;
+  text-transform: lowercase;
+}
+
+.status-text.analyzed {
+  color: #10b981; /* Green */
+}
+
+.status-text.in-progress {
+  color: #f59e0b; /* Yellow/Amber */
+}
+
+.status-text.failed {
+  color: #ef4444; /* Red */
 }
 
 .view-btn {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: #000;
   color: #fff;
   border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.view-btn:hover {
+  opacity: 0.9;
 }
