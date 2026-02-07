@@ -1,0 +1,110 @@
+/* DASHBOARD WRAPPER */
+.dashboard-wrapper {
+  padding: 40px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Space Mono', monospace;
+  background-color: #ffffff;
+}
+
+/* HEADER SECTION */
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #000;
+}
+
+.last-scan {
+  font-size: 13px;
+  color: #71717a;
+  margin: 0;
+}
+
+/* GRID SYSTEM */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Equal columns */
+  gap: 24px;
+}
+
+/* MAIN CARD COMPONENT */
+.main-card {
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* SPANNING LOGIC */
+.grid-span-2 {
+  grid-column: span 2;
+}
+
+/* LAYOUT HELPERS */
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+/* CLICKABLE STATES (For Verdicts leading to Deep Dive) */
+.main-card.clickable {
+  cursor: pointer;
+}
+
+.main-card.clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: 10px 10px 0px #000000;
+}
+
+/* PERFORMANCE SECTION SPECIFICS */
+.main-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* DIVIDER FOR DASHBOARD */
+.header-divider {
+  border: 0;
+  border-top: 1px solid #e4e4e7;
+  margin: 24px 0 40px 0;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-span-2 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    padding: 24px;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .grid-span-2 {
+    grid-column: span 1;
+  }
+  .flex-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}

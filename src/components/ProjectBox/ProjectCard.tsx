@@ -1,7 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Added for navigation
 import './ProjectCard.css';
 
-// Reuse the platform icon logic
 const Icons = {
   Instagram: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
@@ -22,6 +22,7 @@ const Icons = {
 
 interface ProjectCardProps {
   project: {
+    id: string; // Ensure id is included in the props
     name: string;
     platform: string;
     dateCreated: string;
@@ -30,13 +31,17 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  // Get icon based on platform string
+  const navigate = useNavigate();
   const PlatformIcon = Icons[project.platform as keyof typeof Icons] || Icons.Website;
 
+  // Function to handle navigating to the detail dashboard
+  const handleViewAnalysis = () => {
+    navigate(`/analyze/${project.id}`);
+  };
+
   return (
-    <div className="project-box">
+    <div className="project-box" onClick={handleViewAnalysis}> 
       <div className="box-preview">
-        {/* Changed ROOK AI text to be visible (black) */}
         <span className="preview-label">ROOK AI</span>
       </div>
       <div className="box-info">
@@ -53,7 +58,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
-      <button className="view-btn">View Analysis</button>
+      <button className="view-btn" onClick={(e) => {
+        e.stopPropagation(); // Prevents double-triggering if the parent div also has onClick
+        handleViewAnalysis();
+      }}>
+        View Analysis
+      </button>
     </div>
   );
 }

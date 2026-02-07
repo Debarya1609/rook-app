@@ -1,0 +1,142 @@
+.dashboard-wrapper {
+  padding: 40px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Space Mono', monospace;
+  background-color: #ffffff;
+}
+
+/* HEADER STYLING */
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.header-nav {
+  margin-bottom: 12px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #71717a;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 0;
+}
+
+.header-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #000;
+}
+
+.project-id-tag {
+  font-size: 11px;
+  background: #f4f4f5;
+  color: #71717a;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* GRID LAYOUT - THE CORE FIX */
+.dashboard-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important; /* Forces 3 columns */
+  gap: 24px !important;
+  margin-top: 32px;
+  align-items: stretch; /* Ensures all cards in a row have equal height */
+}
+
+/* DASHBOARD CARDS */
+.main-card {
+  background: #ffffff;
+  border: 2px solid #000000; /* High contrast border */
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* SPANNING */
+.grid-span-2 {
+  grid-column: span 2 !important;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* INTERACTIVITY */
+.main-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-card.clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.view-detail-hint {
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: #646cff;
+  padding-top: 16px;
+}
+
+/* PERFORMANCE TEXT */
+.performance-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.card-footer {
+  margin-top: auto;
+  font-size: 11px;
+  color: #71717a;
+  padding-top: 16px;
+  border-top: 1px solid #f4f4f5;
+}
+
+.header-divider {
+  border: 0;
+  border-top: 1px solid #e4e4e7;
+  margin: 0;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-span-2 {
+    grid-column: span 1 !important;
+  }
+  .flex-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

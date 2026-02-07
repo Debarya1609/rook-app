@@ -1,4 +1,4 @@
-import { motion, type Variants, AnimatePresence } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Home as HomeIcon,
   Search,
@@ -9,20 +9,14 @@ import {
   Settings
 } from "lucide-react";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; // Added Hooks
 import "./Sidebar.css";
 
-type NavID = "home" | "analyze" | "evaluate" | "build";
-
-interface SidebarProps {
-  activeId: NavID;
-  onNavigate: (id: NavID) => void;
-}
-
 const navItems = [
-  { id: "home", label: "Home", icon: HomeIcon },
-  { id: "analyze", label: "Rook Analyze", icon: Search },
-  { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle },
-  { id: "build", label: "Rook Build", icon: Sparkles },
+  { id: "home", label: "Home", icon: HomeIcon, path: "/home" },
+  { id: "analyze", label: "Rook Analyze", icon: Search, path: "/analyze" },
+  { id: "evaluate", label: "Rook Evaluate", icon: CheckCircle, path: "/evaluate" },
+  { id: "build", label: "Rook Build", icon: Sparkles, path: "/build" },
 ] as const;
 
 const sidebarVariants: Variants = {
@@ -30,8 +24,17 @@ const sidebarVariants: Variants = {
   collapsed: { width: 72 },
 };
 
-export default function Sidebar({ activeId, onNavigate }: SidebarProps) {
+export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation(); // Gets current URL
+  const navigate = useNavigate(); // Handles page changes
+
+  // Professional highlight logic: check if the current path starts with the item path
+  // This keeps "Rook Analyze" active even when on "/analyze/project-id"
+  const getIsActive = (path: string) => {
+    if (path === "/home") return location.pathname === "/home";
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <motion.aside
@@ -52,13 +55,13 @@ export default function Sidebar({ activeId, onNavigate }: SidebarProps) {
           <nav className="sidebar-nav">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = item.id === activeId; // Highlight logic
+              const isActive = getIsActive(item.path);
               
               return (
                 <div 
                   key={item.id} 
                   className={`sidebar-item ${isActive ? "active" : ""}`}
-                  onClick={() => onNavigate(item.id)} // Trigger navigation
+                  onClick={() => navigate(item.path)} // Navigate to path
                 >
                   <div className="icon-wrapper">
                     <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
@@ -70,7 +73,6 @@ export default function Sidebar({ activeId, onNavigate }: SidebarProps) {
           </nav>
         </div>
 
-        {/* User Profile Block: Pinned to floor using CSS margin-top: auto */}
         <div className="sidebar-profile">
           <div className="profile-container">
             <div className="profile-avatar">

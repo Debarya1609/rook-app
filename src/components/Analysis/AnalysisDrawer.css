@@ -1,0 +1,130 @@
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  background: #ffffff;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #000;
+}
+
+.drawer-close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #71717a;
+  transition: color 0.2s;
+}
+
+.drawer-close-icon:hover {
+  color: #000;
+}
+
+.drawer-content {
+  padding: 40px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.drawer-header {
+  margin-bottom: 40px;
+}
+
+.drawer-category {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #646cff; /* Primary accent color */
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.drawer-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 24px;
+  margin: 8px 0 0 0;
+  font-weight: 700;
+  color: #000;
+}
+
+.drawer-section {
+  margin-bottom: 32px;
+}
+
+.section-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #3f3f46;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f4f4f5;
+  padding-bottom: 8px;
+}
+
+.section-text, .signal-desc, .secondary-list li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #111;
+}
+
+.signal-item {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #71717a;
+}
+
+.secondary-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.secondary-list li {
+  margin-bottom: 12px;
+}
+
+.drawer-footer {
+  padding: 24px 40px;
+  border-top: 1px solid #e4e4e7;
+  background: #fafafa;
+}
+
+.copy-btn {
+  width: 100%;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  opacity: 0.9;
+}
